@@ -1,6 +1,7 @@
 import React from "react";
 import { FaSearch } from "react-icons/fa";
 import { NavLink } from "react-router-dom";
+import Search from "./Search";
 
 function Navbar() {
   return (
@@ -35,18 +36,7 @@ function Navbar() {
             Community
           </NavLink>
         </div>
-        <div>
-          <form className="flex gap-2 items-center">
-            <input
-              type="text"
-              placeholder="Search..."
-              className=" text-sm p-2 border-4 h-9 w-60 border-gray-500 rounded-2xl focus:outline-none"
-            />
-            <button type="submit" className="w-10 text-lg text-center ">
-              <FaSearch />
-            </button>
-          </form>
-        </div>
+        <Search />
       </div>
     </div>
   );

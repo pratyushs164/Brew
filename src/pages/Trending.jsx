@@ -1,6 +1,6 @@
 import React from "react";
 import { CardProvider, useCard } from "../context";
-import Card from "./Card";
+import Card from "../components/Card";
 
 function Trending() {
   const { trending } = useCard();
