@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 function Navbar() {
   return (
     <div>
-      <div className="border-4 border-amber-200 h-25 p-4 flex text-white justify-between items-center">
+      <div className="  h-25 p-4 flex text-white justify-between items-center">
         <div>
           <img src="null" alt="Icon" />
         </div>
@@ -16,7 +16,7 @@ function Navbar() {
               `${isActive ? "bg-gray-500 rounded-4xl p-2" : "p-2"} `
             }
           >
-            Rating & Review
+            Ratings & Reviews
           </NavLink>
           <NavLink
             to={"/blogs"}

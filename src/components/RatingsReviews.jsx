@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { CardProvider } from "../context";
-import Card from "./Card";
+import RatingReviewHeader from "./RatingReviewHeader";
+import { Outlet } from "react-router-dom";
 
 function RatingsReviews() {
   const [trending, setTrending] = useState([]);
@@ -19,15 +20,12 @@ function RatingsReviews() {
   }, []);
 
   return (
-    <CardProvider value={{ trending }}>
-      <div className="flex justify-center">
-        {trending.map((movie) => (
-          <div key={movie.id} className="mx-8">
-            <Card movie={movie} />
-          </div>
-        ))}
-      </div>
-    </CardProvider>
+    <>
+      <CardProvider value={{ trending }}>
+        <RatingReviewHeader />
+        <Outlet />
+      </CardProvider>
+    </>
   );
 }
 
