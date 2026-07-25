@@ -1,5 +1,5 @@
 import React from "react";
-import taxidriver from "../assets/taxi_driver.jpeg";
+
 function SearchCard({ movie }) {
   movie = {
     id: movie.id,
