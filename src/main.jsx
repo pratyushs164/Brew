@@ -19,14 +19,43 @@ import {
   SearchPage,
 } from "./pages/index.js";
 import { CardProvider } from "./context/CardContext.js";
+import { AuthProvider } from "./context/AuthContext.js";
+import AuthLayout from "./components/AuthLayout.jsx";
+import Login from "./components/Login.jsx";
+import SignUp from "./components/SignUp.jsx";
 
 function Root() {
   const [trending, setTrending] = useState([]);
   const [watchlist, setWatchlist] = useState([]);
   const [search, setSearch] = useState([]);
+  const [userData, setUserData] = useState({});
+
+  const login = (data) => {
+    setUserData({ ...userData, status: true, data: data });
+  };
+  const logout = () => {
+    setUserData({ ...userData, status: false, data: {} });
+  };
+
   const router = createBrowserRouter(
     createRoutesFromElements(
       <Route path="/" element={<App />}>
+        <Route
+          path="login"
+          element={
+            <AuthLayout>
+              <Login />
+            </AuthLayout>
+          }
+        />
+        <Route
+          path="signup"
+          element={
+            <AuthLayout>
+              <SignUp />
+            </AuthLayout>
+          }
+        />
         <Route path="ratings&reviews" element={<RatingsReviews />}>
           <Route index element={<Navigate to="trending" replace />} />
 
@@ -42,18 +71,20 @@ function Root() {
   );
 
   return (
-    <CardProvider
-      value={{
-        trending,
-        setTrending,
-        watchlist,
-        setWatchlist,
-        search,
-        setSearch,
-      }}
-    >
-      <RouterProvider router={router} />
-    </CardProvider>
+    <AuthProvider value={{ login, logout, userData }}>
+      <CardProvider
+        value={{
+          trending,
+          setTrending,
+          watchlist,
+          setWatchlist,
+          search,
+          setSearch,
+        }}
+      >
+        <RouterProvider router={router} />
+      </CardProvider>
+    </AuthProvider>
   );
 }
 

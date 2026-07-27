@@ -20,6 +20,7 @@ export const CardContext = createContext({
       poster_path: "/6Q21yptoOCUq4ErwVncesLPVplb.jpg",
     },
   ],
+  movieDetail: [{}],
 });
 
 export const useCard = () => {

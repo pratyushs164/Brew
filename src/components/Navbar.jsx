@@ -1,9 +1,19 @@
 import React from "react";
 import { FaSearch } from "react-icons/fa";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import Search from "./Search";
+import { useAuth } from "../context/AuthContext";
+import LogoutBtn from "./LogoutBtn";
 
 function Navbar() {
+  const { userData } = useAuth();
+  const authStatus = userData.status;
+  const navigate = useNavigate();
+
+  const navItems = [
+    { name: "Login", slug: "./login", active: !authStatus },
+    { name: "Signup", slug: "./signup", active: !authStatus },
+  ];
   return (
     <div>
       <div className="  h-25 p-4 flex text-white justify-between items-center">
@@ -35,6 +45,28 @@ function Navbar() {
           >
             Community
           </NavLink>
+        </div>
+
+        <div>
+          <ul>
+            {navItems.map((item) =>
+              item.ative ? (
+                <li>
+                  <button
+                    onClick={() => navigate(item.slug)}
+                    className="'inline-bock px-6 py-2 duration-200 hover:bg-blue-100 rounded-full'"
+                  >
+                    {item.name}
+                  </button>
+                </li>
+              ) : null,
+            )}
+            {authStatus && (
+              <li>
+                <LogoutBtn />
+              </li>
+            )}
+          </ul>
         </div>
         <Search />
       </div>
