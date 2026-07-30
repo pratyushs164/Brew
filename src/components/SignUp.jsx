@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import authService from "../appwrite/auth";
-import { Link, matchPath } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
@@ -19,6 +19,7 @@ function SignUp() {
       if (user) {
         login(user);
       }
+
       navigate("/");
     } catch (error) {
       setError(error.message);
@@ -66,6 +67,7 @@ function SignUp() {
             <Input
               type="password"
               label="Password"
+              placeholder="Enter your password"
               {...register("password", {
                 required: true,
               })}

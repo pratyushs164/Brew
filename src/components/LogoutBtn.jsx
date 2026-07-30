@@ -3,10 +3,10 @@ import authService from "../appwrite/auth";
 import { useAuth } from "../context/AuthContext";
 
 function LogoutBtn() {
-  const lougoutUser = useAuth().logout;
+  const logoutUser = useAuth().logout;
   const logoutHandler = () => {
     authService.logout().then(() => {
-      lougoutUser();
+      logoutUser();
     });
   };
   return (

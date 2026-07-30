@@ -21,14 +21,17 @@ import {
 import { CardProvider } from "./context/CardContext.js";
 import { AuthProvider } from "./context/AuthContext.js";
 import AuthLayout from "./components/AuthLayout.jsx";
-import Login from "./components/Login.jsx";
-import SignUp from "./components/SignUp.jsx";
+import Login from "./pages/Login.jsx";
+import SignUp from "./pages/SignUp.jsx";
 
 function Root() {
   const [trending, setTrending] = useState([]);
   const [watchlist, setWatchlist] = useState([]);
   const [search, setSearch] = useState([]);
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState({
+    status: false,
+    data: null,
+  });
 
   const login = (data) => {
     setUserData({ ...userData, status: true, data: data });
@@ -43,7 +46,7 @@ function Root() {
         <Route
           path="login"
           element={
-            <AuthLayout>
+            <AuthLayout authentication={false}>
               <Login />
             </AuthLayout>
           }
@@ -51,7 +54,7 @@ function Root() {
         <Route
           path="signup"
           element={
-            <AuthLayout>
+            <AuthLayout authentication={false}>
               <SignUp />
             </AuthLayout>
           }

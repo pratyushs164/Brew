@@ -3,7 +3,7 @@ import { Account, Client, ID } from "appwrite";
 
 class AuthService {
   client = new Client();
-  sccount;
+  account;
 
   constructor() {
     this.client.setProject(conf.projectId).setEndpoint(conf.appwriteUrl);
@@ -11,12 +11,14 @@ class AuthService {
   }
   createUser = async function ({ email, password, name }) {
     try {
-      return await this.account.create({
+      const userAccount = await this.account.create({
         userId: ID.unique(),
         email,
         password,
         name,
       });
+      if (userAccount) return this.login({ email, password });
+      else return userAccount;
     } catch (error) {
       console.log(`FAILED TO CREATE USER: ${error.message}`);
       throw error;
